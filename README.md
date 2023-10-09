@@ -41,9 +41,12 @@ proposes a system of automatic opening and closing of door by sensing any body m
 
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/08f92f8b-1e33-4596-8894-a261c7bc76be)
 
+
 ### Register architecture of x30 for GPIOs:
 
-![GPIO](./Images/GPIO.png)
+
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/dcb0d6b6-af63-40c2-8af7-d9ae39fa711a)
+
 
 x30[3:0] is row pins of keypad.
 
