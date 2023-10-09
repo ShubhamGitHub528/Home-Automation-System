@@ -41,6 +41,24 @@ proposes a system of automatic opening and closing of door by sensing any body m
 
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/08f92f8b-1e33-4596-8894-a261c7bc76be)
 
+### Register architecture of x30 for GPIOs:
+
+![GPIO](./Images/GPIO.png)
+
+x30[3:0] is row pins of keypad.
+
+x30[7:4] is column pins of keypad.
+
+x30[14:8] is 7 segment display pins.
+
+x30[25] is mode_led to indicate input / display mode of system. LED is ON if input mode else OFF for display mode.
+
+x30[27] is next input which is used as enter button to store each character we enter.
+
+x30[29] is delay pin where it accepts signal from 555 timer.
+
+x30[31] is input/display mode input pin.
+
 ### C Code for the design.
 ```
 int sensorValue;
