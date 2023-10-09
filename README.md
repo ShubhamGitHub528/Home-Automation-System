@@ -41,6 +41,10 @@ proposes a system of automatic opening and closing of door by sensing any body m
 
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/08f92f8b-1e33-4596-8894-a261c7bc76be)
 
+### Assumed Schematic.
+
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/bff81d81-9270-4947-9827-d41de1f9d28b)
+
 
 ### Register architecture of x30 for GPIOs:
 
