@@ -39,7 +39,7 @@ proposes a system of automatic opening and closing of door by sensing any body m
 
 ### Block Diagram
 
-![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/08f92f8b-1e33-4596-8894-a261c7bc76be)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/0cb74d1c-50d3-482b-8799-66d291921b45)
 
 ### Assumed Schematic.
 
