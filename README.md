@@ -42,6 +42,7 @@ proposes a system of automatic opening and closing of door by sensing any body m
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/08f92f8b-1e33-4596-8894-a261c7bc76be)
 
 ### C Code for the design.
+```
 int sensorValue;
 int GoutValue;
 int GoutValue_reg;
@@ -123,8 +124,9 @@ void delaytime(int seconds) {
         }
     }
 }
-
+```
 ### Assembly code conversion.
+```
 shubham_proj.o:     file format elf32-littleriscv
 
 Disassembly of section .text:
@@ -198,10 +200,10 @@ Disassembly of section .text:
    10190:	02c12403          	lw	s0,44(sp)
    10194:	03010113          	add	sp,sp,48
    10198:	00008067          	ret
-
+```
    
 ### Number of different instructions: 15
-
+```
 List of unique instructions:
 nop
 lw
@@ -218,7 +220,7 @@ jal
 or
 lui
 bne
-
+```
 
 ## Word of Thanks
 I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to complete this flow smoothly.
