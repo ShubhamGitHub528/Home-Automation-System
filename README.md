@@ -152,99 +152,106 @@ void delaytime(int seconds) {
 ```
 ### Assembly code conversion.
 ```
-shubham_proj.o:     file format elf32-littleriscv
+
+out:     file format elf32-littleriscv
+
 
 Disassembly of section .text:
 
-00010094 <main>:
-   10094:	ff010113          	add	sp,sp,-16
-   10098:	00112623          	sw	ra,12(sp)
-   1009c:	00812423          	sw	s0,8(sp)
-   100a0:	01010413          	add	s0,sp,16
-   100a4:	000117b7          	lui	a5,0x11
-   100a8:	1a07a023          	sw	zero,416(a5) # 111a0 <GoutValue>
-   100ac:	000117b7          	lui	a5,0x11
-   100b0:	1a07a783          	lw	a5,416(a5) # 111a0 <GoutValue>
-   100b4:	00179713          	sll	a4,a5,0x1
-   100b8:	80e1a423          	sw	a4,-2040(gp) # 111a4 <GoutValue_reg>
-   100bc:	8081a783          	lw	a5,-2040(gp) # 111a4 <GoutValue_reg>
-   100c0:	00ff6f33          	or	t5,t5,a5
-   100c4:	001f7713          	and	a4,t5,1
-   100c8:	000117b7          	lui	a5,0x11
-   100cc:	18e7ae23          	sw	a4,412(a5) # 1119c <_DATA_BEGIN_>
-   100d0:	000117b7          	lui	a5,0x11
-   100d4:	19c7a703          	lw	a4,412(a5) # 1119c <_DATA_BEGIN_>
-   100d8:	00100793          	li	a5,1
-   100dc:	02f71a63          	bne	a4,a5,10110 <main+0x7c>
+00010074 <main>:
+   10074:	ff010113          	addi	sp,sp,-16
+   10078:	00112623          	sw	ra,12(sp)
+   1007c:	00812423          	sw	s0,8(sp)
+   10080:	01010413          	addi	s0,sp,16
+   10084:	000117b7          	lui	a5,0x11
+   10088:	1807a423          	sw	zero,392(a5) # 11188 <__DATA_BEGIN__>
+   1008c:	000117b7          	lui	a5,0x11
+   10090:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
+   10094:	00179713          	slli	a4,a5,0x1
+   10098:	000117b7          	lui	a5,0x11
+   1009c:	18e7a623          	sw	a4,396(a5) # 1118c <GoutValue_reg>
+   100a0:	000117b7          	lui	a5,0x11
+   100a4:	18c7a783          	lw	a5,396(a5) # 1118c <GoutValue_reg>
+   100a8:	00ff6f33          	or	t5,t5,a5
+   100ac:	001f7713          	andi	a4,t5,1
+   100b0:	80e1a423          	sw	a4,-2040(gp) # 11190 <sensorValue>
+   100b4:	8081a703          	lw	a4,-2040(gp) # 11190 <sensorValue>
+   100b8:	00100793          	li	a5,1
+   100bc:	02f71e63          	bne	a4,a5,100f8 <main+0x84>
+   100c0:	000117b7          	lui	a5,0x11
+   100c4:	00100713          	li	a4,1
+   100c8:	18e7a423          	sw	a4,392(a5) # 11188 <__DATA_BEGIN__>
+   100cc:	000117b7          	lui	a5,0x11
+   100d0:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
+   100d4:	00179713          	slli	a4,a5,0x1
+   100d8:	000117b7          	lui	a5,0x11
+   100dc:	18e7a623          	sw	a4,396(a5) # 1118c <GoutValue_reg>
    100e0:	000117b7          	lui	a5,0x11
-   100e4:	00100713          	li	a4,1
-   100e8:	1ae7a023          	sw	a4,416(a5) # 111a0 <GoutValue>
-   100ec:	000117b7          	lui	a5,0x11
-   100f0:	1a07a783          	lw	a5,416(a5) # 111a0 <GoutValue>
-   100f4:	00179713          	sll	a4,a5,0x1
-   100f8:	80e1a423          	sw	a4,-2040(gp) # 111a4 <GoutValue_reg>
-   100fc:	8081a783          	lw	a5,-2040(gp) # 111a4 <GoutValue_reg>
-   10100:	00ff6f33          	or	t5,t5,a5
-   10104:	3e800513          	li	a0,1000
-   10108:	02c000ef          	jal	10134 <delaytime>
-   1010c:	fb9ff06f          	j	100c4 <main+0x30>
-   10110:	000117b7          	lui	a5,0x11
-   10114:	1a07a023          	sw	zero,416(a5) # 111a0 <GoutValue>
-   10118:	000117b7          	lui	a5,0x11
-   1011c:	1a07a783          	lw	a5,416(a5) # 111a0 <GoutValue>
-   10120:	00179713          	sll	a4,a5,0x1
-   10124:	80e1a423          	sw	a4,-2040(gp) # 111a4 <GoutValue_reg>
-   10128:	8081a783          	lw	a5,-2040(gp) # 111a4 <GoutValue_reg>
-   1012c:	00ff6f33          	or	t5,t5,a5
-   10130:	f95ff06f          	j	100c4 <main+0x30>
+   100e4:	18c7a783          	lw	a5,396(a5) # 1118c <GoutValue_reg>
+   100e8:	00ff6f33          	or	t5,t5,a5
+   100ec:	3e800513          	li	a0,1000
+   100f0:	034000ef          	jal	ra,10124 <delaytime>
+   100f4:	fb9ff06f          	j	100ac <main+0x38>
+   100f8:	000117b7          	lui	a5,0x11
+   100fc:	1807a423          	sw	zero,392(a5) # 11188 <__DATA_BEGIN__>
+   10100:	000117b7          	lui	a5,0x11
+   10104:	1887a783          	lw	a5,392(a5) # 11188 <__DATA_BEGIN__>
+   10108:	00179713          	slli	a4,a5,0x1
+   1010c:	000117b7          	lui	a5,0x11
+   10110:	18e7a623          	sw	a4,396(a5) # 1118c <GoutValue_reg>
+   10114:	000117b7          	lui	a5,0x11
+   10118:	18c7a783          	lw	a5,396(a5) # 1118c <GoutValue_reg>
+   1011c:	00ff6f33          	or	t5,t5,a5
+   10120:	f8dff06f          	j	100ac <main+0x38>
 
-00010134 <delaytime>:
-   10134:	fd010113          	add	sp,sp,-48
-   10138:	02812623          	sw	s0,44(sp)
-   1013c:	03010413          	add	s0,sp,48
-   10140:	fca42e23          	sw	a0,-36(s0)
-   10144:	fe042623          	sw	zero,-20(s0)
-   10148:	0340006f          	j	1017c <delaytime+0x48>
-   1014c:	fe042423          	sw	zero,-24(s0)
-   10150:	0100006f          	j	10160 <delaytime+0x2c>
-   10154:	fe842783          	lw	a5,-24(s0)
-   10158:	00178793          	add	a5,a5,1
-   1015c:	fef42423          	sw	a5,-24(s0)
-   10160:	fe842703          	lw	a4,-24(s0)
-   10164:	000f47b7          	lui	a5,0xf4
-   10168:	23f78793          	add	a5,a5,575 # f423f <__global_pointer$+0xe28a3>
-   1016c:	fee7d4e3          	bge	a5,a4,10154 <delaytime+0x20>
-   10170:	fec42783          	lw	a5,-20(s0)
-   10174:	00178793          	add	a5,a5,1
-   10178:	fef42623          	sw	a5,-20(s0)
-   1017c:	fec42703          	lw	a4,-20(s0)
-   10180:	fdc42783          	lw	a5,-36(s0)
-   10184:	fcf744e3          	blt	a4,a5,1014c <delaytime+0x18>
-   10188:	00000013          	nop
-   1018c:	00000013          	nop
-   10190:	02c12403          	lw	s0,44(sp)
-   10194:	03010113          	add	sp,sp,48
-   10198:	00008067          	ret
+00010124 <delaytime>:
+   10124:	fd010113          	addi	sp,sp,-48
+   10128:	02812623          	sw	s0,44(sp)
+   1012c:	03010413          	addi	s0,sp,48
+   10130:	fca42e23          	sw	a0,-36(s0)
+   10134:	fe042623          	sw	zero,-20(s0)
+   10138:	0340006f          	j	1016c <delaytime+0x48>
+   1013c:	fe042423          	sw	zero,-24(s0)
+   10140:	0100006f          	j	10150 <delaytime+0x2c>
+   10144:	fe842783          	lw	a5,-24(s0)
+   10148:	00178793          	addi	a5,a5,1
+   1014c:	fef42423          	sw	a5,-24(s0)
+   10150:	fe842703          	lw	a4,-24(s0)
+   10154:	000f47b7          	lui	a5,0xf4
+   10158:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe28b7>
+   1015c:	fee7d4e3          	bge	a5,a4,10144 <delaytime+0x20>
+   10160:	fec42783          	lw	a5,-20(s0)
+   10164:	00178793          	addi	a5,a5,1
+   10168:	fef42623          	sw	a5,-20(s0)
+   1016c:	fec42703          	lw	a4,-20(s0)
+   10170:	fdc42783          	lw	a5,-36(s0)
+   10174:	fcf744e3          	blt	a4,a5,1013c <delaytime+0x18>
+   10178:	00000013          	nop
+   1017c:	02c12403          	lw	s0,44(sp)
+   10180:	03010113          	addi	sp,sp,48
+   10184:	00008067          	ret
 ```
    
 ### Number of different instructions: 15
 ```
+Number of different instructions: 15
 List of unique instructions:
-nop
-lw
-and
-li
-ret
-j
-sll
-sw
 bge
-add
-blt
+sw
 jal
 or
+addi
 lui
+lw
+ret
 bne
+blt
+j
+li
+andi
+slli
+nop
+shu
 ```
 
 ## Word of Thanks
