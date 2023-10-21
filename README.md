@@ -150,6 +150,17 @@ void delaytime(int seconds) {
     }
 }
 ```
+### Assembly code conversion
+
+Compile the c program using RISCV-V GNU Toolchain and dump the assembly code into C_code.txt using the below commands.
+
+```
+riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out C_code.c
+riscv64-unknown-elf-objdump -d  -r out > C_code.txt
+```
+
+
+
 ### Assembly code conversion.
 ```
 
