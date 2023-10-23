@@ -37,14 +37,12 @@ x30[31] is input/display mode input pin.
 
 ### C Code for the design.
 ```
+
+int main()
+{
 int sensorValue;
 int GoutValue;
 int GoutValue_reg;
-
-void initialize();
-void delaytime(int);
-int main()
-{
 
 GoutValue =0;
 GoutValue_reg = GoutValue*2;
@@ -87,8 +85,13 @@ if (sensorValue ==1)
 	:"x30"
 	);
 
+	for (i = 0; i < 3000; i++) {
+        	for (j = 0; j < 1000000; j++) {
+            	// Adding a loop inside to approximate seconds
+        	}
+    	    }
 
-	delaytime(1000);
+
 	}
 else
 	{
@@ -106,18 +109,11 @@ else
 	}
 
 }
-delaytime(500);
+
 return 0;
 }
 
-void delaytime(int seconds) {
-    int i, j;
-    for (i = 0; i < seconds; i++) {
-        for (j = 0; j < 1000000; j++) {
-            //loop for delay
-        }
-    }
-}
+
 ```
 ### Assembly code conversion
 
