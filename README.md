@@ -35,7 +35,7 @@ x30[29] is delay pin where it accepts signal from 555 timer.
 
 x30[31] is input/display mode input pin.
 
-### C Code for the design.
+*C Code for the design*
 ```
 
 int main()
@@ -115,7 +115,7 @@ return 0;
 
 
 ```
-### Assembly code conversion
+*Assembly code command*
 
 Compile the c program using RISCV-V GNU Toolchain and dump the assembly code into C_code.txt using the below commands.
 
@@ -126,7 +126,7 @@ riscv64-unknown-elf-objdump -d  -r out > C_code.txt
 
 
 
-### Assembly code conversion.
+*Assembly code conversion*
 ```
 
 out:     file format elf32-littleriscv
@@ -184,7 +184,7 @@ Disassembly of section .text:
    1010c:	f6dff06f          	j	10078 <main+0x24>
 ```
    
-### Number of different instructions: 15
+*Number of different instructions: 15*
 ```
 Number of different instructions: 11
 List of unique instructions:
@@ -201,6 +201,209 @@ sw
 slli
 
 ```
+
+### Spike Simulation.
+
+*Code*
+```
+#include<stdio.h>
+
+int main()
+{
+int sensorValue,i,j;
+int GoutValue,Result1,dummy;
+int GoutValue_reg,Door;
+
+
+// GoutValue =0;
+// GoutValue_reg = GoutValue*2;
+
+//asm code to initialize the garage door keep it 0 make it closed initialy
+/*
+asm volatile(
+	"or x30, x30, %0\n\t" 
+	:
+	:"r"(GoutValue_reg)
+	:"x30"
+	);
+*/
+
+
+for (int j=0; j<15;j++) 
+{
+
+if(j<10)
+			GoutValue = 1;
+	else
+			GoutValue =0;
+			
+			
+//  asm code to read sensor value
+/*
+asm volatile(
+	"andi %0, x30, 1\n\t"
+	:"=r"(sensorValue)
+	:
+	:
+	);
+*/
+	asm volatile(
+		"or x30, x30, %1\n\t"
+		"andi %0, x30, 0x01\n\t"
+		: "=r" (GoutValue_reg)
+		: "r" (GoutValue)
+		: "x30"
+		);
+
+
+
+//if condition logic
+if (sensorValue ==1)
+	{
+	dummy=0xFFFFFFFD;
+	
+	// printf(" \n");
+	
+	Door=1;
+	// GoutValue_reg = GoutValue*2;
+	
+	//asm code to set output reg
+	/*
+	asm volatile(
+	"or x30, x30, %0\n\t" 
+	:
+	:"r"(GoutValue_reg)
+	:"x30"
+	);
+	*/
+	
+	asm volatile(
+            "and x30,x30, %0\n\t"     // Load immediate 1 into x30
+            "ori x30, x30,2"                 // output at 2nd bit , that switches on the motor
+            :
+            :"r"(dummy)
+            :"x30"
+            );
+            
+            asm volatile(
+	    	"addi %0, x30, 0\n\t"
+	    	:"=r"(Result1)
+	    	:
+	    	:"x30"
+	    	);
+    	printf("Result1 = %d\n",Result1);
+    	
+	/*
+	for (i = 0; i < 3000; i++) {
+        	for (j = 0; j < 1000000; j++) {
+            	// Adding a loop inside to approximate seconds
+        	}
+    	    }
+	*/
+
+	}
+else
+	{
+	
+	dummy=0xFFFFFFFD;
+	
+	Door=0;
+	// GoutValue_reg = GoutValue*2;
+	
+	/*
+	//asm code to set output reg	
+	asm volatile(
+	"or x30, x30, %0\n\t" 
+	:
+	:"r"(GoutValue_reg)
+	:"x30"
+	);
+	*/
+	
+	asm volatile( 
+            "and x30,x30, %0\n\t"     
+            "ori x30, x30,0"            
+            :
+            :"r"(dummy)
+            :"x30"
+        );
+        asm volatile(
+	    	"addi %0, x30, 0\n\t"
+	    	:"=r"(Result1)
+	    	:
+	    	:"x30"
+	    	);
+	 printf("Result1 = %d\n",Result1);
+
+	}
+	printf("Door=%d \n", GoutValue); 
+}
+
+return 0;
+}
+
+
+```
+
+*Assembly Code*
+```
+out:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
+   10060:	fec42783          	lw	a5,-20(s0)
+   10064:	00ff6f33          	or	t5,t5,a5
+   10068:	001f7793          	andi	a5,t5,1
+   1006c:	fef42423          	sw	a5,-24(s0)
+   10070:	fe442703          	lw	a4,-28(s0)
+   10074:	00100793          	li	a5,1
+   10078:	02f71663          	bne	a4,a5,100a4 <main+0x50>
+   1007c:	ffd00793          	li	a5,-3
+   10080:	fef42023          	sw	a5,-32(s0)
+   10084:	00100793          	li	a5,1
+   10088:	fcf42e23          	sw	a5,-36(s0)
+   1008c:	fe042783          	lw	a5,-32(s0)
+   10090:	00ff7f33          	and	t5,t5,a5
+   10094:	002f6f13          	ori	t5,t5,2
+   10098:	000f0793          	mv	a5,t5
+   1009c:	fcf42c23          	sw	a5,-40(s0)
+   100a0:	fc1ff06f          	j	10060 <main+0xc>
+   100a4:	ffd00793          	li	a5,-3
+   100a8:	fef42023          	sw	a5,-32(s0)
+   100ac:	fc042e23          	sw	zero,-36(s0)
+   100b0:	fe042783          	lw	a5,-32(s0)
+   100b4:	00ff7f33          	and	t5,t5,a5
+   100b8:	000f6f13          	ori	t5,t5,0
+   100bc:	000f0793          	mv	a5,t5
+   100c0:	fcf42c23          	sw	a5,-40(s0)
+   100c4:	f9dff06f          	j	10060 <main+0xc>
+```
+
+*Number of different instructions: 11*
+```
+
+List of unique instructions:
+sw
+li
+lw
+addi
+ori
+j
+and
+mv
+or
+bne
+andi
+```
+### Results
+
+![Screenshot from 2023-10-25 14-13-27](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/164efa5a-6dc2-4754-a23d-816aae74d048)
+
 
 ## Word of Thanks
 I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to complete this flow smoothly.
