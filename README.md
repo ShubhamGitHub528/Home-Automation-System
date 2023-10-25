@@ -206,7 +206,7 @@ slli
 
 *Code*
 ```
-#include<stdio.h>
+// #include<stdio.h>
 
 int main()
 {
@@ -347,6 +347,7 @@ return 0;
 
 *Assembly Code*
 ```
+
 out:     file format elf32-littleriscv
 
 
@@ -386,19 +387,19 @@ Disassembly of section .text:
 
 *Number of different instructions: 11*
 ```
-
 List of unique instructions:
+or
+bne
+and
+j
 sw
-li
+mv
 lw
 addi
 ori
-j
-and
-mv
-or
-bne
+li
 andi
+
 ```
 ### Results
 
