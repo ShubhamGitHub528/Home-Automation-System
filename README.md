@@ -194,12 +194,13 @@ spike pk out
 Here, We have one inputs and only one output, so there are only *two* test cases and out of them only one of them will result in the output being high, and in other the output is expected as low.For the sake of simulation in spice we are not using an infinite loop but just one iteration of it.
 For spike simulation, the inputs is hard coded for the two test cases.
 
+Case 1: When Gout Value is hard coded as 0. We get SensorValue = 0 and Door = 0(Closed)
+![Screenshot from 2023-10-25 18-02-02](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/c2f6f54f-3826-4553-beef-2b1237fb5dba)
 
 
+Case 2: When Gout Value is hard coded as 1. We get SensorValue = Z(HighImpedance) and Door = 1(Open)
+![Screenshot from 2023-10-25 18-02-52](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/386dd660-2a35-485f-b391-30c448024ffa)
 
-### Results
-
-![Screenshot from 2023-10-25 17-51-55](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/f51ec33f-3fdc-4c24-9b41-a81832ba3a25)
 
 
 
