@@ -35,178 +35,9 @@ x30[29] is delay pin where it accepts signal from 555 timer.
 
 x30[31] is input/display mode input pin.
 
-**C Code for the design**
-```
-
-int main()
-{
-int sensorValue;
-int GoutValue;
-int GoutValue_reg;
-
-GoutValue =0;
-GoutValue_reg = GoutValue*2;
-
-//asm code to initialize the garage door keep it 0 make it closed initialy
-asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-
-
-
-while (1) {
-
-
-//  asm code to read sensor value
-asm volatile(
-	"andi %0, x30, 1\n\t"
-	:"=r"(sensorValue)
-	:
-	:
-	);
-
-
-
-
-//if condition logic
-if (sensorValue ==1)
-	{
-	GoutValue=1;
-	GoutValue_reg = GoutValue*2;
-	
-	//asm code to set output reg
-	asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-
-	for (i = 0; i < 3000; i++) {
-        	for (j = 0; j < 1000000; j++) {
-            	// Adding a loop inside to approximate seconds
-        	}
-    	    }
-
-
-	}
-else
-	{
-	GoutValue=0;
-	GoutValue_reg = GoutValue*2;
-	
-	//asm code to set output reg	
-	asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-
-	}
-
-}
-
-return 0;
-}
-
-
-```
-**Assembly code command**
-
-Compile the c program using RISCV-V GNU Toolchain and dump the assembly code into C_code.txt using the below commands.
-
-```
-riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out C_code.c
-riscv64-unknown-elf-objdump -d  -r out > C_code.txt
-```
-
-
-
-**Assembly code conversion**
-```
-
-out:     file format elf32-littleriscv
-
-
-Disassembly of section .text:
-
-00010054 <main>:
-   10054:	fd010113          	addi	sp,sp,-48
-   10058:	02812623          	sw	s0,44(sp)
-   1005c:	03010413          	addi	s0,sp,48
-   10060:	fe042223          	sw	zero,-28(s0)
-   10064:	fe442783          	lw	a5,-28(s0)
-   10068:	00179793          	slli	a5,a5,0x1
-   1006c:	fef42023          	sw	a5,-32(s0)
-   10070:	fe042783          	lw	a5,-32(s0)
-   10074:	00ff6f33          	or	t5,t5,a5
-   10078:	001f7793          	andi	a5,t5,1
-   1007c:	fcf42e23          	sw	a5,-36(s0)
-   10080:	fdc42703          	lw	a4,-36(s0)
-   10084:	00100793          	li	a5,1
-   10088:	06f71663          	bne	a4,a5,100f4 <main+0xa0>
-   1008c:	00100793          	li	a5,1
-   10090:	fef42223          	sw	a5,-28(s0)
-   10094:	fe442783          	lw	a5,-28(s0)
-   10098:	00179793          	slli	a5,a5,0x1
-   1009c:	fef42023          	sw	a5,-32(s0)
-   100a0:	fe042783          	lw	a5,-32(s0)
-   100a4:	00ff6f33          	or	t5,t5,a5
-   100a8:	fe042623          	sw	zero,-20(s0)
-   100ac:	0340006f          	j	100e0 <main+0x8c>
-   100b0:	fe042423          	sw	zero,-24(s0)
-   100b4:	0100006f          	j	100c4 <main+0x70>
-   100b8:	fe842783          	lw	a5,-24(s0)
-   100bc:	00178793          	addi	a5,a5,1
-   100c0:	fef42423          	sw	a5,-24(s0)
-   100c4:	fe842703          	lw	a4,-24(s0)
-   100c8:	000f47b7          	lui	a5,0xf4
-   100cc:	23f78793          	addi	a5,a5,575 # f423f <__global_pointer$+0xe292f>
-   100d0:	fee7d4e3          	bge	a5,a4,100b8 <main+0x64>
-   100d4:	fec42783          	lw	a5,-20(s0)
-   100d8:	00178793          	addi	a5,a5,1
-   100dc:	fef42623          	sw	a5,-20(s0)
-   100e0:	fec42703          	lw	a4,-20(s0)
-   100e4:	000017b7          	lui	a5,0x1
-   100e8:	bb778793          	addi	a5,a5,-1097 # bb7 <main-0xf49d>
-   100ec:	fce7d2e3          	bge	a5,a4,100b0 <main+0x5c>
-   100f0:	f89ff06f          	j	10078 <main+0x24>
-   100f4:	fe042223          	sw	zero,-28(s0)
-   100f8:	fe442783          	lw	a5,-28(s0)
-   100fc:	00179793          	slli	a5,a5,0x1
-   10100:	fef42023          	sw	a5,-32(s0)
-   10104:	fe042783          	lw	a5,-32(s0)
-   10108:	00ff6f33          	or	t5,t5,a5
-   1010c:	f6dff06f          	j	10078 <main+0x24>
-```
-   
-***Number of different instructions: 15***
-```
-Number of different instructions: 11
-List of unique instructions:
-bne
-j
-lw
-andi
-addi
-li
-lui
-or
-bge
-sw
-slli
-
-```
-
-### Spike Simulation.
 
 **Code**
 ```
-#include<stdio.h>
 
 int main()
 {
@@ -215,39 +46,9 @@ int GoutValue,Result1,Mask;
 int Sensor_IN,Door;
 
 
-// GoutValue =0;
-// GoutValue_reg = GoutValue*2;
-
-//asm code to initialize the garage door keep it 0 make it closed initialy
-/*
-asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-*/
-
-
-for (int j=0; j<15;j++) 
-//while(1)
+while(1)
 {
 
-if(j<10)
-			GoutValue = 1;
-	else
-			GoutValue =0;
-			
-			
-//  asm code to read sensor value
-/*
-asm volatile(
-	"andi %0, x30, 1\n\t"
-	:"=r"(sensorValue)
-	:
-	:
-	);
-*/
 	asm volatile(
 		"or x30, x30, %1\n\t"
 		"andi %0, x30, 0x01\n\t"
@@ -257,26 +58,12 @@ asm volatile(
 		);
 
 
-
-//if condition logic
 if (GoutValue)
 	{
 	Mask=0xFFFFFFFD;
-	
-	// printf(" \n");
-	
+
 	Door=1;
-	// GoutValue_reg = GoutValue*2;
-	
-	//asm code to set output reg
-	/*
-	asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-	*/
+
 	
 	asm volatile(
             "and x30,x30, %0\n\t"     // Load immediate 1 into x30
@@ -292,15 +79,7 @@ if (GoutValue)
 	    	:
 	    	:"x30"
 	    	);
-    	printf("Result1 = %d\n",Result1);
-    	
-	/*
-	for (i = 0; i < 3000; i++) {
-        	for (j = 0; j < 1000000; j++) {
-            	// Adding a loop inside to approximate seconds
-        	}
-    	    }
-	*/
+
 
 	}
 else
@@ -309,17 +88,7 @@ else
 	Mask=0xFFFFFFFD;
 	
 	Door=0;
-	// GoutValue_reg = GoutValue*2;
-	
-	/*
-	//asm code to set output reg	
-	asm volatile(
-	"or x30, x30, %0\n\t" 
-	:
-	:"r"(GoutValue_reg)
-	:"x30"
-	);
-	*/
+
 	
 	asm volatile( 
             "and x30,x30, %0\n\t"     
@@ -334,29 +103,27 @@ else
 	    	:
 	    	:"x30"
 	    	);
-	 printf("Result1 = %d\n",Result1);
+
 
 	}
-	printf("Door=%d \n", GoutValue); 
+	
 }
 
 return 0;
 }
 
-```
-
-
-*The simulation commands and outputs are as follows*
 
 ```
-riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out file.c
-spike pk out
+### Assembly code conversion
+
+The above C program is compiled using the RISC-V GNU toolchain and the assembly code is dumped into a text file.
+
+Below codes are run on the terminal to get the assembly code.
 ```
-### Results
+riscv64-unknown-elf-gcc -mabi=ilp32 -march=rv32i -ffreestanding -nostdlib -o ./out Garage.c 
+riscv64-unknown-elf-objdump -d -r out > Garage_assembly.txt
 
-![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/9222f9de-4949-411f-bc9e-c4e3a8d3b77d)
-
-
+```
 
 **Assembly Code**
 ```
@@ -397,6 +164,7 @@ Disassembly of section .text:
 ```
 
 ***Number of different instructions: 11***
+To find the number of unique instructions make sure to rename the filename as assembly.txt since the python script that we are using is opening the file name with assembly.txt and both files should be in the same directory. The python script I am using is already uploaded. Now follow the command to get the number of different instructions used.
 ```
 List of unique instructions:
 lw
@@ -412,6 +180,27 @@ j
 mv
 
 ```
+
+
+### Spike Simulation
+Now spike simulation is done using following commands.
+
+```
+riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out file.c
+spike pk out
+```
+
+
+Here, We have one inputs and only one output, so there are only *two* test cases and out of them only one of them will result in the output being high, and in other the output is expected as low.For the sake of simulation in spice we are not using an infinite loop but just one iteration of it.
+For spike simulation, the inputs is hard coded for the two test cases.
+
+
+
+
+### Results
+
+![Screenshot from 2023-10-25 17-51-55](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/f51ec33f-3fdc-4c24-9b41-a81832ba3a25)
+
 
 
 ## Word of Thanks
