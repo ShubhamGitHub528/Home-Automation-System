@@ -35,7 +35,7 @@ x30[29] is delay pin where it accepts signal from 555 timer.
 
 x30[31] is input/display mode input pin.
 
-*C Code for the design*
+**C Code for the design**
 ```
 
 int main()
@@ -115,7 +115,7 @@ return 0;
 
 
 ```
-*Assembly code command*
+**Assembly code command**
 
 Compile the c program using RISCV-V GNU Toolchain and dump the assembly code into C_code.txt using the below commands.
 
@@ -126,7 +126,7 @@ riscv64-unknown-elf-objdump -d  -r out > C_code.txt
 
 
 
-*Assembly code conversion*
+**Assembly code conversion**
 ```
 
 out:     file format elf32-littleriscv
@@ -184,7 +184,7 @@ Disassembly of section .text:
    1010c:	f6dff06f          	j	10078 <main+0x24>
 ```
    
-*Number of different instructions: 15*
+***Number of different instructions: 15***
 ```
 Number of different instructions: 11
 List of unique instructions:
@@ -204,7 +204,7 @@ slli
 
 ### Spike Simulation.
 
-*Code*
+**Code**
 ```
 // #include<stdio.h>
 
@@ -345,7 +345,7 @@ return 0;
 
 ```
 
-*Assembly Code*
+**Assembly Code**
 ```
 
 out:     file format elf32-littleriscv
@@ -385,7 +385,7 @@ Disassembly of section .text:
    100c4:	f9dff06f          	j	10060 <main+0xc>
 ```
 
-*Number of different instructions: 11*
+***Number of different instructions: 11***
 ```
 List of unique instructions:
 or
