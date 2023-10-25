@@ -206,13 +206,13 @@ slli
 
 **Code**
 ```
-// #include<stdio.h>
+#include<stdio.h>
 
 int main()
 {
 int sensorValue,i,j;
-int GoutValue,Result1,dummy;
-int GoutValue_reg,Door;
+int GoutValue,Result1,Mask;
+int Sensor_IN,Door;
 
 
 // GoutValue =0;
@@ -230,6 +230,7 @@ asm volatile(
 
 
 for (int j=0; j<15;j++) 
+//while(1)
 {
 
 if(j<10)
@@ -250,17 +251,17 @@ asm volatile(
 	asm volatile(
 		"or x30, x30, %1\n\t"
 		"andi %0, x30, 0x01\n\t"
-		: "=r" (GoutValue_reg)
-		: "r" (GoutValue)
+		: "=r" (Sensor_IN)			// Input
+		: "r" (GoutValue)			// Storing Input
 		: "x30"
 		);
 
 
 
 //if condition logic
-if (sensorValue ==1)
+if (GoutValue)
 	{
-	dummy=0xFFFFFFFD;
+	Mask=0xFFFFFFFD;
 	
 	// printf(" \n");
 	
@@ -281,7 +282,7 @@ if (sensorValue ==1)
             "and x30,x30, %0\n\t"     // Load immediate 1 into x30
             "ori x30, x30,2"                 // output at 2nd bit , that switches on the motor
             :
-            :"r"(dummy)
+            :"r"(Mask)
             :"x30"
             );
             
@@ -305,7 +306,7 @@ if (sensorValue ==1)
 else
 	{
 	
-	dummy=0xFFFFFFFD;
+	Mask=0xFFFFFFFD;
 	
 	Door=0;
 	// GoutValue_reg = GoutValue*2;
@@ -324,7 +325,7 @@ else
             "and x30,x30, %0\n\t"     
             "ori x30, x30,0"            
             :
-            :"r"(dummy)
+            :"r"(Mask)
             :"x30"
         );
         asm volatile(
@@ -342,12 +343,23 @@ else
 return 0;
 }
 
+```
+
+
+*The simulation commands and outputs are as follows*
 
 ```
+riscv64-unknown-elf-gcc -march=rv64i -mabi=lp64 -ffreestanding -o out file.c
+spike pk out
+```
+### Results
+
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/9222f9de-4949-411f-bc9e-c4e3a8d3b77d)
+
+
 
 **Assembly Code**
 ```
-
 out:     file format elf32-littleriscv
 
 
@@ -361,49 +373,45 @@ Disassembly of section .text:
    10064:	00ff6f33          	or	t5,t5,a5
    10068:	001f7793          	andi	a5,t5,1
    1006c:	fef42423          	sw	a5,-24(s0)
-   10070:	fe442703          	lw	a4,-28(s0)
-   10074:	00100793          	li	a5,1
-   10078:	02f71663          	bne	a4,a5,100a4 <main+0x50>
-   1007c:	ffd00793          	li	a5,-3
-   10080:	fef42023          	sw	a5,-32(s0)
-   10084:	00100793          	li	a5,1
-   10088:	fcf42e23          	sw	a5,-36(s0)
-   1008c:	fe042783          	lw	a5,-32(s0)
-   10090:	00ff7f33          	and	t5,t5,a5
-   10094:	002f6f13          	ori	t5,t5,2
-   10098:	000f0793          	mv	a5,t5
-   1009c:	fcf42c23          	sw	a5,-40(s0)
-   100a0:	fc1ff06f          	j	10060 <main+0xc>
-   100a4:	ffd00793          	li	a5,-3
-   100a8:	fef42023          	sw	a5,-32(s0)
-   100ac:	fc042e23          	sw	zero,-36(s0)
-   100b0:	fe042783          	lw	a5,-32(s0)
-   100b4:	00ff7f33          	and	t5,t5,a5
-   100b8:	000f6f13          	ori	t5,t5,0
-   100bc:	000f0793          	mv	a5,t5
-   100c0:	fcf42c23          	sw	a5,-40(s0)
-   100c4:	f9dff06f          	j	10060 <main+0xc>
+   10070:	fec42783          	lw	a5,-20(s0)
+   10074:	02078663          	beqz	a5,100a0 <main+0x4c>
+   10078:	ffd00793          	li	a5,-3
+   1007c:	fef42223          	sw	a5,-28(s0)
+   10080:	00100793          	li	a5,1
+   10084:	fef42023          	sw	a5,-32(s0)
+   10088:	fe442783          	lw	a5,-28(s0)
+   1008c:	00ff7f33          	and	t5,t5,a5
+   10090:	002f6f13          	ori	t5,t5,2
+   10094:	000f0793          	mv	a5,t5
+   10098:	fcf42e23          	sw	a5,-36(s0)
+   1009c:	fc5ff06f          	j	10060 <main+0xc>
+   100a0:	ffd00793          	li	a5,-3
+   100a4:	fef42223          	sw	a5,-28(s0)
+   100a8:	fe042023          	sw	zero,-32(s0)
+   100ac:	fe442783          	lw	a5,-28(s0)
+   100b0:	00ff7f33          	and	t5,t5,a5
+   100b4:	000f6f13          	ori	t5,t5,0
+   100b8:	000f0793          	mv	a5,t5
+   100bc:	fcf42e23          	sw	a5,-36(s0)
+   100c0:	fa1ff06f          	j	10060 <main+0xc>
 ```
 
 ***Number of different instructions: 11***
 ```
 List of unique instructions:
-or
-bne
-and
-j
-sw
-mv
 lw
 addi
 ori
-li
 andi
+sw
+li
+beqz
+or
+and
+j
+mv
 
 ```
-### Results
-
-![Screenshot from 2023-10-25 14-13-27](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/164efa5a-6dc2-4754-a23d-816aae74d048)
 
 
 ## Word of Thanks
