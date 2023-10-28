@@ -201,7 +201,14 @@ Case 1: When Gout Value is hard coded as 0. We get SensorValue = 0 and Door = 0(
 Case 2: When Gout Value is hard coded as 1. We get SensorValue = Z(HighImpedance) and Door = 1(Open)
 ![Screenshot from 2023-10-25 18-02-52](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/386dd660-2a35-485f-b391-30c448024ffa)
 
+### Functional Simulation
+![Screenshot from 2023-10-28 00-24-52](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/513ee31f-b13d-4566-a2a0-b38e3d8d9152)
 
+**GtkWaveform.**
+![Screenshot from 2023-10-28 23-30-29](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/e9fd0fd0-f1cb-4e73-bb62-8852c6af1966)
+
+
+![Screenshot from 2023-10-28 23-27-41](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/dfc4997d-aa2c-4c04-be2e-c54e61c109a2)
 
 
 ## Word of Thanks
