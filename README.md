@@ -202,9 +202,11 @@ Case 2: When Gout Value is hard coded as 1. We get SensorValue = Z(HighImpedance
 ![Screenshot from 2023-10-25 18-02-52](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/386dd660-2a35-485f-b391-30c448024ffa)
 
 ### Functional Simulation
+
 ![Screenshot from 2023-10-28 00-24-52](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/513ee31f-b13d-4566-a2a0-b38e3d8d9152)
 
 **GtkWaveform.**
+By performing functional simulation we can verify our design through the verilog code which is processor.v and testbench.v. Here one trigger pin is there , input_wire is the sensorValue pin and output_wires is Door. So as shown in the gtkwave diagram when trigger is made zero and SensorValue pin(input_wire) is 0 , buzzer and led (output_wires) is 0. There is also shown the clk, write_done and ID_instruction in the gtkwave diagram below.
 ![Screenshot from 2023-10-28 23-30-29](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/e9fd0fd0-f1cb-4e73-bb62-8852c6af1966)
 
 
