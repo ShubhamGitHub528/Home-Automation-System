@@ -213,6 +213,47 @@ By performing functional simulation we can verify our design through the verilog
 ![Screenshot from 2023-10-28 23-27-41](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/dfc4997d-aa2c-4c04-be2e-c54e61c109a2)
 
 
+### Instruction verification
+
+![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/acdadb8b-6161-44fa-b5ce-f58c90736ee7)
+
+![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/08ec655a-09d6-4846-a8e3-7127f011a1cc)
+
+
+
+
+### Gate Level Simulation :
+
+```
+
+read_liberty -lib sky130_fd_sc_hd__tt_025C_1v80_256.lib 
+read_verilog processor.v 
+synth -top wrapper
+dfflibmap -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib 
+abc -liberty sky130_fd_sc_hd__tt_025C_1v80_256.lib
+write_verilog synth_processor_test.v
+```
+
+command to run gls simulation
+
+```
+
+iverilog -o test synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
+```
+
+![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/ecccb444-7d79-4d52-a9fd-1176117a5463)
+
+
+### wrapper module after netlist created
+
+```
+show wrapper
+```
+
+![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/1be94917-691d-4aae-8603-e26ee64a6d6c)
+
+
+
 ## Word of Thanks
 I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to complete this flow smoothly.
 
@@ -223,7 +264,7 @@ I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to com
 - Amith Bharadwaj,Colleague,IIIT B
 - Emil Jayanth Lal,Colleague,IIIT B
 - Sumanto Kar,VSD Corp.
-- Mayank Kabra,imtech
+- Mayank Kabra (Founder, Chipcron Pvt. Ltd.)
 
   
   
