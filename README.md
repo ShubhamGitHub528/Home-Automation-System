@@ -254,6 +254,17 @@ show wrapper
 
 
 
+### To generate Processor.
+Upload all.json and assembly code on the given url ```http://16.16.202.21/```
+
+
+
+
+
+
+
+
+
 ## Word of Thanks
 I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to complete this flow smoothly.
 
