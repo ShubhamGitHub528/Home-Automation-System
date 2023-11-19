@@ -265,6 +265,40 @@ Upload all.json and assembly code on the given url ```http://16.16.202.21/```
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Placement 
+/home/shubham/OpenLane/designs/Garage_Door/runs/RUN_2023.11.14_16.11.27/results/floorplan
+magic -T /home/shubham/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/b233d77d-bee0-43a2-9c70-d399a1e1911a)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Word of Thanks
 I sciencerly thank **Mr. Kunal Gosh**(Founder/**VSD**) for helping me out to complete this flow smoothly.
 
