@@ -240,8 +240,8 @@ command to run gls simulation
 
 iverilog -o test synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x256_8.v sky130_fd_sc_hd.v primitives.v
 ```
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/62ba795b-cf65-4d4d-a02b-109837523cad)
 
-![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/ecccb444-7d79-4d52-a9fd-1176117a5463)
 
 
 ### wrapper module after netlist created
@@ -249,8 +249,8 @@ iverilog -o test synth_processor_test.v testbench.v sky130_sram_1kbyte_1rw1r_32x
 ```
 show wrapper
 ```
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/d49c0fd8-e493-4902-b099-be2f6fc9ac05)
 
-![image](https://github.com/DINESHIIITB/iiitb_riscv_drip_irrigation_system/assets/140998565/1be94917-691d-4aae-8603-e26ee64a6d6c)
 
 
 
@@ -278,7 +278,7 @@ make mount
 ## Prepare design
 % prep -design project -verbose 99
 ```
-![Screenshot from 2023-11-15 22-55-49](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/b9a1c588-a1a3-4af6-92a5-45049fc282d8)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/797c5fce-0c5f-44e5-a360-6dd30229c762)
 
 ## Synthesis
 
@@ -297,7 +297,6 @@ To initiate synthesis, use:
 run_synthesis
 ```
 
-![Screenshot from 2023-11-15 23-02-02](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/eaa78027-b9c0-4e5f-9501-f4b15f402bf6)
 
 ## Floorplan:
 
@@ -329,7 +328,6 @@ To execute the floorplan, use the following command:
 
 This command initiates the floorplanning process, incorporating the specified environment variables and switches. Proper configuration ensures optimal silicon utilization, efficient power distribution, and a layout conducive to subsequent design stages.
 
-![Screenshot from 2023-11-15 23-07-23](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/4fb43e7b-2386-46fe-8483-f5591cb86f38)
 
 
 - Post the floorplan run, a .def file will have been created within the results/floorplan directory. We may review floorplan files by checking the floorplan.tcl.
@@ -338,7 +336,7 @@ This command initiates the floorplanning process, incorporating the specified en
 ```bash
 magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
 ```
-![Screenshot from 2023-11-15 23-57-12](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/ac94b061-c3ab-4336-ade9-d48330f644b3)
+
 
 
 Die area (after floorplan)
@@ -370,21 +368,20 @@ To run the placement process, execute the following command:
 ```bash
 run_placement
 ```
-
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/b0a7a831-ad24-4b25-983d-17f1e3eaf30e)
 This command initiates both the Global and Detailed Placement stages, progressing the design towards a physically realizable layout. Proper placement is crucial for meeting performance and design rule specifications in the subsequent steps of the ASIC flow.
 
-![Screenshot from 2023-11-16 00-55-08](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/209a6ede-3e95-48b0-94bb-e9257e4069ef)
+
 
 Post placement: the design can be viewed on magic within results/placement directory. Run the follwing command in that directory:
 
 ```bash
-magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
+magic -T /home/shubham/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
 ```
 
-![Screenshot from 2023-11-16 00-57-02](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/29a262a9-d3f6-4be5-bda1-38e65f6888fe)
 
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/b8861276-5b02-4e77-810d-353d5dcae32b)
 
-![WhatsApp Image 2023-11-16 at 02 31 43_05327e13](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/133416c4-aee6-4494-a31e-1bb281e4810f)
 
 
 ## Clock Tree Synthesis (CTS) Overview:
@@ -406,26 +403,25 @@ run_cts
 
 This command triggers the CTS process, where the tool generates an optimized clock tree structure based on the design requirements and constraints. Achieving a balanced clock distribution is crucial for maintaining synchronization and meeting performance criteria in subsequent stages of the ASIC design flow.
 
-![Screenshot from 2023-11-16 01-04-38](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/8f90dab2-1f53-47f1-8974-f546983bc747)
-
 ### Timing Reports
 
-![Screenshot from 2023-11-16 01-32-14](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/72960463-2357-4155-a206-28e7991503dc)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/967b5d7b-1f59-4629-9a1e-2e5452dee20a)
 
 
 ### AREA Reports
 
-![Screenshot from 2023-11-16 01-32-32](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/21c8d751-ba10-4ebf-86a1-b8ecdf2e7c80)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/1eda3724-cad9-4257-ad86-67e0b1d65dca)
+
 
 
 ### Skew Reports
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/a178b9f4-096a-4f6e-ba0b-0b97b872d98a)
 
-![Screenshot from 2023-11-16 01-33-04](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6b0c12ec-a203-4af0-9a58-8d61eb06d841)
 
 
 ### Power Reports
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/40d365c0-e555-4032-b6f0-20845536fbc4)
 
-![Screenshot from 2023-11-16 01-33-17](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/ef016302-b176-488b-bc7c-51cbed1fff13)
 
 # Routing:
 
@@ -453,37 +449,38 @@ To execute the routing process, use the following command:
 
 This command initiates both the Global Routing and Detailed Routing stages, resulting in a well-defined interconnect system that adheres to design rules and minimizes design rule check (DRC) errors. Proper routing is essential for ensuring signal integrity and meeting performance requirements in the final chip design.
 
-![Screenshot from 2023-11-16 01-41-08](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/25dbec4b-f530-4750-8f1e-676023800b14)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/2afb1325-99cd-4031-9ac0-40594456bfea)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/e9154a35-3420-498a-86b7-bf0a9c68e8e8)
 
-![WhatsApp Image 2023-11-16 at 02 31 43_a72b96b9](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/3bd17745-d375-4c22-ba3c-4b16a99bbec8)
 
 
 View the post-routing design in Magic:
 
 ```bash
-% magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
+% magic -T /home/shubham/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
 
 ```
-
-![Screenshot from 2023-11-16 01-51-58](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/c0f30791-159a-4d6d-93b8-c7e785ef0705)
 
 
 #### post_routing Timing Reports
 
-![Screenshot from 2023-11-16 01-56-31](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/46e10986-80ef-4424-8e0b-9cda7c3d9e97)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/6b6aa089-e566-4900-88b4-24ef369d42a3)
+
 
 
 #### post_routing Area Reports
 
-![Screenshot from 2023-11-16 01-53-21](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/16635e3b-4798-4593-8803-f355ea689f18)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/bf840015-99d1-48d3-9963-9d8d827332d8)
+
 
 #### post_routing Power Reports
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/d76a3afb-9407-41f0-943f-76514b4f5bbf)
 
-![Screenshot from 2023-11-16 01-57-19](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/8475ba77-ac4f-448f-abd4-694bf9e854ec)
 
 
 DRC violation is zero:
-![Screenshot from 2023-11-16 02-01-48](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/6654f7e2-edfd-455a-aac3-2ba5872ca7ee)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/8bc49cda-a23b-4bf6-adb3-8b642ca96b2b)
+
 
 Given a Clock period of 70ns in Json file , setup slack we got after routing is 19.13ns
 
@@ -492,47 +489,6 @@ Max Performance =  ------------------------
                      clock period - slack(setup)
 
 Max Performance = 0.0196 Ghz
-
-## Some Extra Steps:
-
-![Screenshot from 2023-11-14 15-53-31](https://github.com/akhiiasati/Touch_Bell_RISCV/assets/43675821/122ed158-798b-4eb3-814e-917c271fef64)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Placement 
-/home/shubham/OpenLane/designs/Garage_Door/runs/RUN_2023.11.14_16.11.27/results/floorplan
-magic -T /home/shubham/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read wrapper.def &
-![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/b233d77d-bee0-43a2-9c70-d399a1e1911a)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
