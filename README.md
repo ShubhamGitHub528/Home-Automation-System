@@ -340,13 +340,13 @@ magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/Open
 
 
 Die area (after floorplan)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/40a1cd58-5fb5-4765-948a-4d9ee367df5a)
 
-![Screenshot from 2023-11-16 00-50-27](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/c2ced502-9a72-4d87-8d6f-7e4e1ebfe592)
 
 
 Core area (after floorplan)
+![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/fbe79583-3e19-400f-bafa-afde98ff36ce)
 
-![Screenshot from 2023-11-16 00-50-18](https://github.com/akhiiasati/IIITB_Advanced_Physical_Design_using_OpenLANE_Sky130/assets/43675821/83ea8a39-2b2c-4f52-ac4d-d8ebe3e6666b)
 
 ## Placement Overview:
 
