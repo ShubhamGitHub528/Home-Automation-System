@@ -333,54 +333,25 @@ make mount
 ```
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/797c5fce-0c5f-44e5-a360-6dd30229c762)
 
-## Synthesis
+### Synthesis
 
-Logic synthesis transforms the RTL netlist through two key steps:
+Synthesis is the process of converting a high-level hardware description, typically in a hardware description language (HDL) like Verilog or VHDL, into a netlist of logical gates and flip-flops. This netlist represents the functionality of the circuit without specifying the physical layout. Synthesis tools optimize the design for area, power, and timing, generating a register transfer level (RTL) description that serves as the input for subsequent stages of the VLSI Physical design flow.
 
-- GTECH Mapping:
-    - Maps the HDL netlist to generic gates.
-    - Enables logical optimization using AIGERs and other topologies derived from the generic mapped netlist.
-
-- Technology Mapping:
-    - Maps the post-optimized GTECH netlist to standard cells specified in the PDK.
-
-To initiate synthesis, use:
-
-```bash
-run_synthesis
+Follow the below command to run synthesis.
+```
+%run_synthesis
 ```
 
 
-## Floorplan:
+### FloorPlanning
 
-The floorplan stage aims to strategically organize the silicon area, establish a reliable power distribution network (PDN), and define macro placement and blockages for a legalized GDS file. Key considerations include achieving a balanced core utilization, setting aspect ratios, and incorporating power planning features.
+Floor planning involves the strategic allocation of space on a semiconductor chip for different functional blocks. This process determines the overall chip size, the placement of major components, and the interconnections between them. Efficient floor planning is crucial for optimizing chip performance, minimizing signal delays, and managing power distribution. It considers factors such as the physical proximity of critical components, interconnect lengths, and the overall layout's impact on manufacturability. 
 
-Environment Variables / Switches:
+Follow the below command to run Floorplan.
 
-    `FP_CORE_UTIL:` Specifies floorplan core utilization.
-    `FP_ASPECT_RATIO:` Defines the floorplan aspect ratio.
-    `FP_CORE_MARGIN:` Sets the core-to-die margin area.
-    `FP_IO_MODE:` Configures pin arrangements (1 for equidistant, 0 for non-equidistant).
-    `FP_CORE_VMETAL:` Specifies the vertical metal layer for the core.
-    `FP_CORE_HMETAL:` Specifies the horizontal metal layer for the core.
-
-Note: Metal layer values are typically 1 more than those specified.
-
-Power Planning:
-
-    Ring Formation: Connects to pads, enabling power distribution along the chip's edges.
-    Power Straps: Utilizes higher metal layers to deliver power to the chip's middle, reducing IR drop and addressing electro-migration issues.
-
-Floorplan Execution:
-To execute the floorplan, use the following command:
-
-```bash
-
-% run_floorplan
 ```
-
-This command initiates the floorplanning process, incorporating the specified environment variables and switches. Proper configuration ensures optimal silicon utilization, efficient power distribution, and a layout conducive to subsequent design stages.
-
+%run_floorplan
+```
 
 
 - Post the floorplan run, a .def file will have been created within the results/floorplan directory. We may review floorplan files by checking the floorplan.tcl.
@@ -437,25 +408,14 @@ magic -T /home/shubham/.volare/sky130A/libs.tech/magic/sky130A.tech lef read ../
 
 
 
-## Clock Tree Synthesis (CTS) Overview:
+### Clock Tree Synthesis (CTS) Overview:
 
-Clock Tree Synthesis is a critical step in the ASIC design flow aimed at creating an efficient clock distribution network for delivering the clock signal to all sequential elements. The primary objective is to minimize clock skew across the entire chip, ensuring synchronous operation of the design. H-trees are commonly employed as a network topology to achieve this goal.
+The goal is to ensure uniform and low-skew distribution of clock signals to all components, facilitating synchronous and reliable operation of the entire integrated circuit. Clock tree analysis involves designing a hierarchical tree-like structure of clock distribution lines, buffers, and clock gating cells. This process aims to minimize clock skew, reduce power consumption, and meet stringent timing requirements. By carefully managing clock signals, designers can enhance the overall performance and reliability of the chip. The clock tree analysis phase is essential for achieving timing closure and ensuring that all sequential elements in the design are synchronized.
 
-### Key Objectives:
-
-- Clock Distribution: Ensures the clock signal reaches every sequential element in the design.
-- Clock Skew Minimization: Aims to achieve zero clock skew across the chip.
-- H-tree Topology: Common methodology in CTS, providing an effective structure for distributing the clock signal evenly.
-
-#### Command to Run CTS:
-To perform Clock Tree Synthesis, execute the following command:
-
-```bash
-run_cts
+command to run cts:
 ```
-
-This command triggers the CTS process, where the tool generates an optimized clock tree structure based on the design requirements and constraints. Achieving a balanced clock distribution is crucial for maintaining synchronization and meeting performance criteria in subsequent stages of the ASIC design flow.
-
+%run_cts
+```
 ### Timing Reports
 
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/967b5d7b-1f59-4629-9a1e-2e5452dee20a)
@@ -472,13 +432,14 @@ This command triggers the CTS process, where the tool generates an optimized clo
 
 
 
-### Power Reports
+### Performance Reports
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/40d365c0-e555-4032-b6f0-20845536fbc4)
 
 
-# Routing:
+### Routing:
 
-Routing in the OpenLANE ASIC flow involves implementing the interconnect system between standard cells using the remaining available metal layers post Clock Tree Synthesis (CTS) and Power Distribution Network (PDN) generation. TritonRoute is the tool used for routing in OpenLANE, and the process is divided into two stages: Global Routing and Detailed Routing.
+
+Routing is a crucial phase in VLSI physical design that involves the detailed planning and implementation of interconnections between different components on a semiconductor chip. After placement, where the positions of individual elements are determined, the routing process establishes the paths for wires or metal tracks to connect these elements. Global routing defines the high-level connections, while detailed routing specifies the exact paths, adhering to design rules and constraints. Efficient routing aims to minimize signal delays, optimize for performance and area, and meet specified design objectives. Advanced algorithms and optimization techniques are employed to navigate the complex task of interconnecting thousands or millions of components while considering factors like congestion, wirelength, and signal integrity. Successful routing is crucial for achieving the desired functionality, performance, and manufacturability of the integrated circuit.
 
 ### Global Routing:
 `Routing Grids:` The routing region is divided into rectangular grids, represented as coarse 3D routes using the Fastroute tool.
@@ -526,7 +487,7 @@ View the post-routing design in Magic:
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/bf840015-99d1-48d3-9963-9d8d827332d8)
 
 
-#### post_routing Power Reports
+#### post_routing Performance Reports
 ![image](https://github.com/ShubhamGitHub528/Home-Automation-System/assets/140998623/d76a3afb-9407-41f0-943f-76514b4f5bbf)
 
 
@@ -537,9 +498,8 @@ DRC violation is zero:
 
 Given a Clock period of 70ns in Json file , setup slack we got after routing is 19.13ns
 
-                              1
-Max Performance =  ------------------------
-                     clock period - slack(setup)
+                              
+Max Performance = 1 / (clock period - slack(setup))
 
 Max Performance = 0.0196 Ghz
 
