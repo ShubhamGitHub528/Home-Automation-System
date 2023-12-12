@@ -357,9 +357,7 @@ Follow the below command to run Floorplan.
 - Post the floorplan run, a .def file will have been created within the results/floorplan directory. We may review floorplan files by checking the floorplan.tcl.
 - To view the floorplan: Magic is invoked after moving to the results/floorplan directory,then use the floowing command:
 - 
-```bash
-magic -T /home/akhilasati/vsdstdcelldesign/libs/sky130A.tech lef read /home/OpenLane/designs/touch_sensor/runs/RUN_2023.11.14_08.46.33/tmp merged.nom.lef def read wrapper.def &
-```
+
 
 
 
