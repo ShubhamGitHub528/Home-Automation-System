@@ -499,7 +499,7 @@ Given a Clock period of 70ns in Json file , setup slack we got after routing is 
                               
 Max Performance = 1 / (clock period - slack(setup))
 
-Max Performance = 0.0196 Ghz
+Max Performance = 19.6 Mhz
 
 
 
